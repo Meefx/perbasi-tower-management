@@ -9,6 +9,20 @@ config();
 
 const runtimeEnvironment = (process.env.NODE_ENV ?? 'development').toLowerCase();
 
+function getAuthSecret() {
+	const secret = process.env.BETTER_AUTH_SECRET;
+
+	if (secret) {
+		return secret;
+	}
+
+	if (runtimeEnvironment === 'production') {
+		throw new Error('BETTER_AUTH_SECRET is required when NODE_ENV=production.');
+	}
+
+	return 'development-secret-at-least-32-characters';
+}
+
 function getTrustedOrigins() {
 	return (
 		process.env.AUTH_TRUSTED_ORIGINS ??
@@ -42,12 +56,12 @@ function getDatabase() {
 export const auth = betterAuth({
 	appName: 'Perbasi Tower Management',
 	baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:5173',
-	secret: process.env.BETTER_AUTH_SECRET,
+	secret: getAuthSecret(),
 	trustedOrigins: getTrustedOrigins(),
 	database: getDatabase(),
 	emailAndPassword: {
 		enabled: true,
-		disableSignUp: true,
+		disableSignUp: process.env.AUTH_ENABLE_SIGNUP !== 'true',
 		minPasswordLength: 8
 	}
 });

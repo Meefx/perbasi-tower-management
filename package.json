@@ -13,6 +13,8 @@
 		"auth:migrate": "auth migrate --config src/lib/server/auth/provider.ts --yes",
 		"auth:migrate:dev": "cross-env NODE_ENV=development auth migrate --config src/lib/server/auth/provider.ts --yes",
 		"auth:migrate:prod": "cross-env NODE_ENV=production auth migrate --config src/lib/server/auth/provider.ts --yes",
+		"auth:seed": "node scripts/auth-seed.mjs",
+		"auth:seed:dev": "cross-env NODE_ENV=development node scripts/auth-seed.mjs",
 		"db:migrate": "node scripts/db-migrate.mjs",
 		"db:migrate:dev": "cross-env NODE_ENV=development node scripts/db-migrate.mjs",
 		"db:migrate:prod": "cross-env NODE_ENV=production node scripts/db-migrate.mjs",
