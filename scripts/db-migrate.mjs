@@ -25,6 +25,25 @@ if (runtimeEnvironment === 'production') {
 				created_at timestamptz not null default now(),
 				updated_at timestamptz not null default now()
 			);
+
+			create table if not exists user_profiles (
+				user_id text primary key,
+				role text not null check (
+					role in (
+						'sponsor',
+						'klub',
+						'board',
+						'executive',
+						'pengurus_provinsi',
+						'pengurus_kabupaten',
+						'pengurus_zona',
+						'pengurus_departemen'
+					)
+				),
+				display_name text,
+				created_at timestamptz not null default now(),
+				updated_at timestamptz not null default now()
+			);
 		`);
 
 		console.log('PostgreSQL migration completed.');
@@ -44,6 +63,25 @@ if (runtimeEnvironment === 'production') {
 			create table if not exists app_metadata (
 				key text primary key,
 				value text not null,
+				created_at text not null default current_timestamp,
+				updated_at text not null default current_timestamp
+			);
+
+			create table if not exists user_profiles (
+				user_id text primary key,
+				role text not null check (
+					role in (
+						'sponsor',
+						'klub',
+						'board',
+						'executive',
+						'pengurus_provinsi',
+						'pengurus_kabupaten',
+						'pengurus_zona',
+						'pengurus_departemen'
+					)
+				),
+				display_name text,
 				created_at text not null default current_timestamp,
 				updated_at text not null default current_timestamp
 			);
