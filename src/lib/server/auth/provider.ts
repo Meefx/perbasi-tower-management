@@ -11,12 +11,13 @@ const runtimeEnvironment = (process.env.NODE_ENV ?? 'development').toLowerCase()
 
 function getAuthSecret() {
 	const secret = process.env.BETTER_AUTH_SECRET;
+	const isBuildCommand = process.env.npm_lifecycle_event === 'build';
 
 	if (secret) {
 		return secret;
 	}
 
-	if (runtimeEnvironment === 'production') {
+	if (runtimeEnvironment === 'production' && !isBuildCommand) {
 		throw new Error('BETTER_AUTH_SECRET is required when NODE_ENV=production.');
 	}
 
