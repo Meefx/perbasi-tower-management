@@ -10,7 +10,11 @@ config();
 const runtimeEnvironment = (process.env.NODE_ENV ?? 'development').toLowerCase();
 
 function getTrustedOrigins() {
-	return (process.env.AUTH_TRUSTED_ORIGINS ?? process.env.BETTER_AUTH_URL ?? 'http://localhost:5173')
+	return (
+		process.env.AUTH_TRUSTED_ORIGINS ??
+		process.env.BETTER_AUTH_URL ??
+		'http://localhost:5173'
+	)
 		.split(',')
 		.map((origin) => origin.trim())
 		.filter(Boolean);

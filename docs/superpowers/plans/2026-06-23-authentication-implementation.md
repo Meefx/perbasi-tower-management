@@ -47,12 +47,7 @@
 ```ts
 import { describe, expect, test } from 'vitest';
 
-import {
-	APPLICATION_ROLES,
-	isApplicationRole,
-	isPersistedRole,
-	parsePersistedRole
-} from './roles';
+import { APPLICATION_ROLES, isApplicationRole, isPersistedRole, parsePersistedRole } from './roles';
 
 describe('application roles', () => {
 	test('includes guest and the persisted organization roles', () => {
@@ -328,13 +323,13 @@ AUTH_SEED_ROLE=executive
 Add this property to `DatabaseSchema`:
 
 ```ts
-	user_profiles: {
-		user_id: string;
-		role: PersistedRole;
-		display_name: string | null;
-		created_at: string;
-		updated_at: string;
-	};
+user_profiles: {
+	user_id: string;
+	role: PersistedRole;
+	display_name: string | null;
+	created_at: string;
+	updated_at: string;
+}
 ```
 
 Also import `PersistedRole` from `src/lib/server/auth/roles`.
@@ -351,7 +346,11 @@ import { betterAuth } from 'better-auth';
 const runtimeEnvironment = (process.env.NODE_ENV ?? 'development').toLowerCase();
 
 function getTrustedOrigins() {
-	return (process.env.AUTH_TRUSTED_ORIGINS ?? process.env.BETTER_AUTH_URL ?? 'http://localhost:5173')
+	return (
+		process.env.AUTH_TRUSTED_ORIGINS ??
+		process.env.BETTER_AUTH_URL ??
+		'http://localhost:5173'
+	)
 		.split(',')
 		.map((origin) => origin.trim())
 		.filter(Boolean);
@@ -704,7 +703,12 @@ export const authClient = createAuthClient();
 </script>
 
 <main>
-	<form onsubmit={(event) => { event.preventDefault(); void submit(); }}>
+	<form
+		onsubmit={(event) => {
+			event.preventDefault();
+			void submit();
+		}}
+	>
 		<h1>Login</h1>
 		<label>
 			Email

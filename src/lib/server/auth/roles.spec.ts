@@ -1,11 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import {
-	APPLICATION_ROLES,
-	isApplicationRole,
-	isPersistedRole,
-	parsePersistedRole
-} from './roles';
+import { APPLICATION_ROLES, isApplicationRole, isPersistedRole, parsePersistedRole } from './roles';
 
 describe('application roles', () => {
 	test('includes guest and the persisted organization roles', () => {

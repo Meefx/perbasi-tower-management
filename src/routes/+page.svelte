@@ -11,11 +11,13 @@
 	<section>
 		<p class="eyebrow">PERBASI</p>
 		<h1>Perbasi Tower Management</h1>
-		<p>
-			SvelteKit application scaffold with a development SQLite database and production PostgreSQL
-			database configuration.
-		</p>
-		<a href={resolve('/api/health/db')}>Check database health</a>
+		<p>Management application and API backend for Perbasi Tower role-based floor data.</p>
+		<nav aria-label="Project links">
+			<a href={resolve('/login')}>Login</a>
+			<a href={resolve('/dashboard')}>Dashboard</a>
+			<a href={resolve('/api/me')}>Current actor</a>
+			<a href={resolve('/api/health/db')}>Database health</a>
+		</nav>
 	</section>
 </main>
 
@@ -64,6 +66,12 @@
 		max-width: 560px;
 		font-size: 1.08rem;
 		line-height: 1.7;
+	}
+
+	nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
 	}
 
 	a {
